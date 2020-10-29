@@ -1,0 +1,31 @@
+// ПРИМЕР входных данных: <volume db="-49.9" mute="0" offsetDb="0" etag="6213593a6132887e23fe0476b9ab2cba">15</volume>   ЦЕЛЬ в конце: >15<
+//получение уровня громкости из входных данных от устройства
+
+//int pars_address(const String line)	//вариант под 'Ардуино'
+string pars_address(const string line)
+{
+	//String number_find;	//вариант под 'Ардуино'
+	string number_find; // временная переменная
+
+	for (int i = line.length() - 1; i > 0; i--)	//итерируемся с конца строки
+	{
+		if (line[i] == '<')	// условие для начала определения длинный числа
+		{
+			for (int a = i - 1; a >= 0; a--)	//итерируемся дальше
+			{
+				if (line[a] == '>')		//условие для подсчета длинны числа
+				{
+					//number_find = line.substr(a + 1, (i - a - 1));
+					for(int c = a +1; c < i; c++)	// записываем число в строку 
+					{
+						number_find += line[c];
+					}
+					break;
+				}
+			}
+			break;
+		}
+	}
+	return number_find;
+	//return number_find.toInt(); // вариант для возврата числа под 'Ардуино'
+}
